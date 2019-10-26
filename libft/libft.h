@@ -6,7 +6,7 @@
 /*   By: sgah <sgah@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/16 21:20:22 by sgah              #+#    #+#             */
-/*   Updated: 2019/10/11 17:16:11 by sgah             ###   ########.fr       */
+/*   Updated: 2019/10/26 14:37:11 by sgah             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # include <string.h>
 # include <stdlib.h>
 # include <unistd.h>
+# define ABS(a)	(a < 0) ? -a : a
 
 typedef struct		s_list
 {
@@ -68,20 +69,11 @@ char				*ft_strjoin(char const *s1, char const *s2);
 char				*ft_strtrim(char const *s, char const *set);
 char				**ft_split(char const *s, char c);
 char				*ft_itoa(int n);
+char				*ft_itoa_base(int n, int base);
 
 void				ft_putstr_fd(char const *s, int fd);
 void				ft_putnbr_fd(int n, int fd);
 void				ft_putendl_fd(char const *s, int fd);
 void				ft_putchar_fd(char c, int fd);
-
-t_list				*ft_lstnew(void *content);
-void				ft_lstdelone(t_list *alst, void (*del)(void *));
-void				ft_lstclear(t_list **alst, void (*del)(void*));
-void				ft_lstiter(t_list *lst, void (*f)(void *));
-t_list				*ft_lstmap(t_list *lst, void *(*f)(void *));
-void				ft_lstadd_front(t_list **alst, t_list *new);
-int					ft_lstsize(t_list *lst);
-t_list				*ft_lstlast(t_list *lst);
-void				ft_lstadd_back(t_list **alst, t_list *new);
 
 #endif

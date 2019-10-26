@@ -6,17 +6,17 @@
 /*   By: sgah <sgah@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/01 18:35:18 by sgah              #+#    #+#             */
-/*   Updated: 2019/10/01 18:35:19 by sgah             ###   ########.fr       */
+/*   Updated: 2019/10/26 14:37:11 by sgah             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
-
 # include <stdint.h>
 # include <wchar.h>
 # include <stdarg.h>
 # include <ctype.h>
+# include "../libft/libft.h"
 
 typedef struct	s_tab
 {
