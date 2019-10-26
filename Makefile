@@ -12,19 +12,21 @@ SRC		= display_c.c display_o.c display_s.c display_ws.c init.c \
 		display_u.c display_x.c parse_arguments.c parse_precision.c reinit.c \
 		display_gap.c display_p.c display_wchar.c ft_printf.c parse_convert.c \
 		parse_specifier.c switch_display.c
-DEP		:= $($(SRC_DIR)/SRC:%.c=$(DEP_DIR)/%.d)
-OBJ		:= $($(SRC_DIR)SRC:%.c=$(OBJ_DIR)/%.o)
+DEP		:= $($(SRC_DIR)/SRC:$(SRC_DIR)/%.c=$(DEP_DIR)/%.d)
+OBJ		:= $($(SRC_DIR)/SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 # COMPILATION
 CC		= gcc
 CFLAGS	= -Wall -Wextra -Werror
 DFLAGS	= -MP -MMD -MF $(DEP_DIR)/$*.d -MT '$@'
-H_FLAGS	= -I include
+LFLAGS	= -L./ -lftprintf -I include/
 
 $(NAME): $(OBJ)
 	@echo 'Creation of $@'
 	@make -C $(LIBFT)
-	@cp libft/libft.a ./$(NAME)
-	@ar -rcs $@ $^
+	@cp $(LIBFT)/$@ .
+	@ar -rcs $(NAME) $(OBJ)
+
+
 
 all: $(NAME)
 
