@@ -24,10 +24,17 @@ CFLAGS	= -Wall -Wextra -Werror -Ofast -fno-builtin
 DFLAGS	= -MP -MMD -MF $(DEP_DIR)/$*.d -MT '$@'
 
 $(NAME): $(OBJ)
-	@echo 'Creation of $@'
 	@ar rc $@ $^
 	@ranlib $@
-
+	@echo "                                                                    "
+	@echo "\033[1;32mCreation of:\033[0m"
+	@echo "███████╗████████╗     ██████╗ ██████╗ ██╗███╗   ██╗████████╗███████╗"
+	@echo "██╔════╝╚══██╔══╝     ██╔══██╗██╔══██╗██║████╗  ██║╚══██╔══╝██╔════╝"
+	@echo "█████╗     ██║        ██████╔╝██████╔╝██║██╔██╗ ██║   ██║   █████╗  "
+	@echo "██╔══╝     ██║        ██╔═══╝ ██╔══██╗██║██║╚██╗██║   ██║   ██╔══╝  "
+	@echo "██║        ██║███████╗██║     ██║  ██║██║██║ ╚████║   ██║   ██║     "
+	@echo "╚═╝        ╚═╝╚══════╝╚═╝     ╚═╝  ╚═╝╚═╝╚═╝  ╚═══╝   ╚═╝   ╚═╝     "
+	@echo "                                                                    "
 all: $(NAME)
 
 clean:
@@ -43,7 +50,7 @@ $(BUILD):
 	@mkdir $@ $(DIRS)
 
 $(OBJ_DIR)/%.o: src/%.c | $(BUILD)
-	@echo 'Compilation of $(notdir $<)'
+	@echo "\033[1;34mft_printf\t\033[1;33mCompilation of $(notdir $<)\033[0m"
 	@$(CC) $(CFLAGS) $(DFLAGS) -I ./inc -c $< -o $@
 
 -include $(DEP)
