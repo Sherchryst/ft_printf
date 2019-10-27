@@ -23,7 +23,7 @@ CFLAGS	= -Wall -Wextra -Werror -Ofast -fno-builtin
 DFLAGS	= -MP -MMD -MF $(DEP_DIR)/$*.d -MT '$@'
 $(NAME): $(OBJ)
 	@ar -rcs $@ $^
-	@echo "\n\033[01mThe library archive of \033[00m\033[32m"
+	@echo "\n\033[01mThe library archive of \033[00m\033[0;32m"
 	@echo "	███████╗████████╗     ██████╗ ██████╗ ██╗███╗   ██╗████████╗███████╗	"
 	@echo "	██╔════╝╚══██╔══╝     ██╔══██╗██╔══██╗██║████╗  ██║╚══██╔══╝██╔════╝	"
 	@echo "	█████╗     ██║        ██████╔╝██████╔╝██║██╔██╗ ██║   ██║   █████╗  	"
@@ -48,7 +48,7 @@ $(BUILD):
 	@mkdir $@ $(DIRS)
 
 $(OBJ_DIR)/%.o: src/%.c | $(BUILD)
-	@echo "\033[1;34mExecute: \t\033[1;33mCompilation of $(notdir $<)\033[0m"
+	@echo "\033[1;34mExecute: \t\033[1;33mCompilation of \033[1;36m$(notdir $<)\033[0m"
 	@$(CC) $(CFLAGS) $(DFLAGS) -I ./inc -c $< -o $@
 
 -include $(DEP)
