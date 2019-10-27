@@ -2,8 +2,7 @@
 BUILD	= .build
 DEP_DIR	= $(BUILD)/dep
 OBJ_DIR = $(BUILD)/obj
-DIRS	:= $(DEP_DIR) $(addprefix $(DEP_DIR)/, $(SUB_DIR)) \
-		  $(OBJ_DIR) $(addprefix $(OBJ_DIR)/, $(SUB_DIR))
+DIRS	:= $(DEP_DIR) $(OBJ_DIR)
 
 # FILES
 NAME	= libftprintf.a
@@ -24,33 +23,33 @@ CFLAGS	= -Wall -Wextra -Werror -Ofast -fno-builtin
 DFLAGS	= -MP -MMD -MF $(DEP_DIR)/$*.d -MT '$@'
 
 $(NAME): $(OBJ)
-	@ar rc $@ $^
-	@ranlib $@
-	@echo "                                                                    "
-	@echo "\033[1;32mCreation of:\033[0m"
-	@echo "███████╗████████╗     ██████╗ ██████╗ ██╗███╗   ██╗████████╗███████╗"
-	@echo "██╔════╝╚══██╔══╝     ██╔══██╗██╔══██╗██║████╗  ██║╚══██╔══╝██╔════╝"
-	@echo "█████╗     ██║        ██████╔╝██████╔╝██║██╔██╗ ██║   ██║   █████╗  "
-	@echo "██╔══╝     ██║        ██╔═══╝ ██╔══██╗██║██║╚██╗██║   ██║   ██╔══╝  "
-	@echo "██║        ██║███████╗██║     ██║  ██║██║██║ ╚████║   ██║   ██║     "
-	@echo "╚═╝        ╚═╝╚══════╝╚═╝     ╚═╝  ╚═╝╚═╝╚═╝  ╚═══╝   ╚═╝   ╚═╝     "
-	@echo "                                                                    "
+	@ar -rcs $@ $^
+	@echo "\n"
+	@echo "\t███████╗████████╗     ██████╗ ██████╗ ██╗███╗   ██╗████████╗███████╗"
+	@echo "\t██╔════╝╚══██╔══╝     ██╔══██╗██╔══██╗██║████╗  ██║╚══██╔══╝██╔════╝"
+	@echo "\t█████╗     ██║        ██████╔╝██████╔╝██║██╔██╗ ██║   ██║   █████╗  "
+	@echo "\t██╔══╝     ██║        ██╔═══╝ ██╔══██╗██║██║╚██╗██║   ██║   ██╔══╝  "
+	@echo "\t██║        ██║███████╗██║     ██║  ██║██║██║ ╚████║   ██║   ██║     "
+	@echo "\t╚═╝        ╚═╝╚══════╝╚═╝     ╚═╝  ╚═╝╚═╝╚═╝  ╚═══╝   ╚═╝   ╚═╝     "
+	@echo "							\033[1;32mHas been created!\033[0m"
+	@echo "\n"
 all: $(NAME)
 
 clean:
-	rm -rf $(BUILD)
+	@rm -rf $(BUILD)
+	@echo "\033[1;34mft_printf\t\033[1;33mCleaning build\t\033[0;32m[OK]\033[0m"
 
 fclean: clean
-	rm -f $(NAME)
-
+	@rm -f $(NAME)
+	@echo "\033[1;34mft_printf\t\033[1;33mCleaning lib\t\033[0;32m[OK]\033[0m"
 re: fclean all
 
 $(BUILD):
-	@echo 'Creation of $(BUILD) directory'
+	@echo "\033[1;32mCreation of .build\033[0m \n"
 	@mkdir $@ $(DIRS)
 
 $(OBJ_DIR)/%.o: src/%.c | $(BUILD)
-	@echo "\033[1;34mft_printf\t\033[1;33mCompilation of $(notdir $<)\033[0m"
+	@echo "\033[1;34mExecute \t\033[1;33mCompilation of $(notdir $<)\033[0m"
 	@$(CC) $(CFLAGS) $(DFLAGS) -I ./inc -c $< -o $@
 
 -include $(DEP)
