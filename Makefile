@@ -1,54 +1,50 @@
 # DIRECTORIES
-SRC_DIR = ft_printf
-DEP_DIR	= $(SRC_DIR)/dep
-OBJ_DIR	= $(SRC_DIR)/obj
-DIR		= $(DEP_DIR) $(OBJ_DIR)
+BUILD	= .build
+DEP_DIR	= $(BUILD)/dep
+OBJ_DIR = $(BUILD)/obj
+DIRS	:= $(DEP_DIR) $(addprefix $(DEP_DIR)/, $(SUB_DIR)) \
+		  $(OBJ_DIR) $(addprefix $(OBJ_DIR)/, $(SUB_DIR))
 
 # FILES
-LIBFT	= libft
 NAME	= libftprintf.a
 SRC		= display_c.c display_o.c display_s.c display_ws.c init.c \
 		parse_field_width.c parser.c treatement.c display_d.c display_other.c \
 		display_u.c display_x.c parse_arguments.c parse_precision.c reinit.c \
 		display_gap.c display_p.c display_wchar.c ft_printf.c parse_convert.c \
-		parse_specifier.c switch_display.c
-DEP		:= $($(SRC_DIR)/SRC:$(SRC_DIR)/%.c=$(DEP_DIR)/%.d)
-OBJ		:= $($(SRC_DIR)/SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
+		parse_specifier.c switch_display.c ft_strndup.c ft_strcmp.c \
+		ft_putnbrmax_fd.c ft_putstr.c ft_strdup.c ft_putnbrumax_fd.c \
+		ft_strcmp.c ft_strnew.c ft_memset.c ft_strlen.c ft_itoa_base.c \
+		ft_calloc.c ft_putchar_fd.c
+DEP		:= $(SRC:%.c=$(DEP_DIR)/%.d)
+OBJ		:= $(SRC:%.c=$(OBJ_DIR)/%.o)
+
 # COMPILATION
 CC		= gcc
-CFLAGS	= -Wall -Wextra -Werror
+CFLAGS	= -Wall -Wextra -Werror -Ofast -fno-builtin
 DFLAGS	= -MP -MMD -MF $(DEP_DIR)/$*.d -MT '$@'
-LFLAGS	= -L./ -lftprintf -I include/
 
 $(NAME): $(OBJ)
 	@echo 'Creation of $@'
-	@make -C $(LIBFT)
-	@cp $(LIBFT)/$@ .
-	@ar -rcs $(NAME) $(OBJ)
-
-
+	@ar rc $@ $^
+	@ranlib $@
 
 all: $(NAME)
 
 clean:
-	@make clean -C $(LIBFT)
-	rm -rf $(DIR)
+	rm -rf $(BUILD)
 
 fclean: clean
-	@make fclean -C $(LIBFT)
 	rm -f $(NAME)
 
 re: fclean all
 
-$(DEP_DIR):
-	mkdir $@
+$(BUILD):
+	@echo 'Creation of $(BUILD) directory'
+	@mkdir $@ $(DIRS)
 
-$(OBJ_DIR):
-	mkdir $@
-
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(DIR)
-	@echo 'Compilation of $<'
-	@$(CC) $(CFLAGS) $(DFLAGS) -c $< -o $@
+$(OBJ_DIR)/%.o: src/%.c | $(BUILD)
+	@echo 'Compilation of $(notdir $<)'
+	@$(CC) $(CFLAGS) $(DFLAGS) -I ./inc -c $< -o $@
 
 -include $(DEP)
 
