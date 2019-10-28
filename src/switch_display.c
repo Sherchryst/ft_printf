@@ -6,7 +6,7 @@
 /*   By: sgah <sgah@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/01 18:17:43 by sgah              #+#    #+#             */
-/*   Updated: 2019/10/27 01:32:03 by sgah             ###   ########.fr       */
+/*   Updated: 2019/10/27 22:01:20 by sgah             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ t_tab		*switch_display(t_tab *tab)
 		display_o(tab);
 	else if (*flag == 'p')
 		display_p(tab);
+	else if (*flag == 'b')
+		display_b(tab);
 	else
 		display_other(tab);
 	return (tab);

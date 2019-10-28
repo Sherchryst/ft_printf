@@ -6,7 +6,7 @@
 /*   By: sgah <sgah@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/01 18:29:40 by sgah              #+#    #+#             */
-/*   Updated: 2019/10/01 18:29:41 by sgah             ###   ########.fr       */
+/*   Updated: 2019/10/27 17:16:50 by sgah             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,14 @@ static int		char_len(wchar_t c)
 	return (len);
 }
 
-static wchar_t	*wstrndup(wchar_t *s1, size_t n)
+static wchar_t	*wstrndup(wchar_t *s1, size_t n, t_tab *tab)
 {
 	wchar_t	*s2;
 	size_t	i;
 
 	i = 0;
 	if (!(s2 = (wchar_t *)malloc(sizeof(wchar_t) * n + 1)))
-		exit(-1);
+		ERROR(1);
 	while (s1[i] && i < n)
 	{
 		s2[i] = s1[i];
@@ -46,14 +46,14 @@ static wchar_t	*wstrndup(wchar_t *s1, size_t n)
 	return (s2);
 }
 
-static wchar_t	*wstrdup(wchar_t *str)
+static wchar_t	*wstrdup(wchar_t *str, t_tab *tab)
 {
 	int		len;
 
 	len = 0;
 	while (str[len])
 		len++;
-	return (wstrndup(str, len));
+	return (wstrndup(str, len, tab));
 }
 
 static t_tab	*do_null(t_tab *tab)
@@ -62,7 +62,7 @@ static t_tab	*do_null(t_tab *tab)
 	int			i;
 
 	i = 0;
-	s = wstrdup(L"(null)");
+	s = wstrdup(L"(null)", tab);
 	if (tab->precision > -1)
 	{
 		while (s[i] && tab->precision-- > 0)
@@ -95,12 +95,12 @@ t_tab			*display_ws(t_tab *tab)
 		len += char_len(s[i++]);
 	}
 	if (tab->convert[3] == '0' && tab->convert[0] != '-')
-		display_gap(tab, '0', tab->field_width - len, 1);
+		display_sep(tab, '0', tab->field_width - len, 1);
 	else if (tab->convert[0] != '-')
-		display_gap(tab, ' ', tab->field_width - len, 1);
+		display_sep(tab, ' ', tab->field_width - len, 1);
 	while (j < i)
 		display_wchar(s[j++], tab);
 	if (tab->convert[0] == '-')
-		display_gap(tab, ' ', tab->field_width - len, 1);
+		display_sep(tab, ' ', tab->field_width - len, 1);
 	return (tab);
 }

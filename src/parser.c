@@ -6,7 +6,7 @@
 /*   By: sgah <sgah@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/01 17:55:49 by sgah              #+#    #+#             */
-/*   Updated: 2019/10/27 01:32:03 by sgah             ###   ########.fr       */
+/*   Updated: 2019/10/27 16:06:32 by sgah             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void			print_format(t_tab *tab, int count)
 	if (!count || count < 0)
 		return ;
 	if (!(format = ft_strndup((tab->copy + (tab->i - count)), count)))
-		exit(1);
+		ERROR_V(1);
 	ft_putstr(format);
 	free(format);
 	format = NULL;
@@ -39,8 +39,10 @@ int					parser(t_tab *tab)
 		if (tab->copy[tab->i] == '%')
 		{
 			print_format(tab, count);
+			IF_ERROR(1);
 			reinit(tab);
 			treatement(tab);
+			IF_ERROR(1);
 			count = 0;
 		}
 		else

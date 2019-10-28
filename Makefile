@@ -6,14 +6,15 @@ DIRS	:= $(DEP_DIR) $(OBJ_DIR)
 
 # FILES
 NAME	= libftprintf.a
-SRC		= display_c.c display_o.c display_s.c display_ws.c init.c \
+PRINTF	= display_c.c display_o.c display_s.c display_ws.c init.c \
 		parse_field_width.c parser.c treatement.c display_d.c display_other.c \
 		display_u.c display_x.c parse_arguments.c parse_precision.c reinit.c \
-		display_gap.c display_p.c display_wchar.c ft_printf.c parse_convert.c \
-		parse_specifier.c switch_display.c ft_strndup.c ft_strcmp.c \
-		ft_putnbrmax_fd.c ft_putstr.c ft_strdup.c ft_putnbrumax_fd.c \
-		ft_strcmp.c ft_strnew.c ft_memset.c ft_strlen.c ft_itoa_base.c \
-		ft_calloc.c ft_putchar_fd.c
+		display_sep.c display_p.c display_wchar.c ft_printf.c parse_convert.c \
+		display_b.c parse_specifier.c switch_display.c 
+LIBFT	= ft_strndup.c ft_strcmp.c ft_putnbrmax_fd.c ft_putstr.c ft_strdup.c \
+		ft_putnbrumax_fd.c ft_strcmp.c ft_strnew.c ft_memset.c ft_strlen.c \
+		ft_itoa_base.c ft_calloc.c ft_putchar_fd.c
+SRC		= $(PRINTF) $(LIBFT)
 DEP		:= $(SRC:%.c=$(DEP_DIR)/%.d)
 OBJ		:= $(SRC:%.c=$(OBJ_DIR)/%.o)
 
@@ -21,16 +22,17 @@ OBJ		:= $(SRC:%.c=$(OBJ_DIR)/%.o)
 CC		= gcc
 CFLAGS	= -Wall -Wextra -Werror -Ofast -fno-builtin
 DFLAGS	= -MP -MMD -MF $(DEP_DIR)/$*.d -MT '$@'
+
 $(NAME): $(OBJ)
 	@ar -rcs $@ $^
-	@echo "\n\033[01mThe library archive of \033[00m\033[0;32m"
-	@echo "	███████╗████████╗     ██████╗ ██████╗ ██╗███╗   ██╗████████╗███████╗	"
-	@echo "	██╔════╝╚══██╔══╝     ██╔══██╗██╔══██╗██║████╗  ██║╚══██╔══╝██╔════╝	"
-	@echo "	█████╗     ██║        ██████╔╝██████╔╝██║██╔██╗ ██║   ██║   █████╗  	"
-	@echo "	██╔══╝     ██║        ██╔═══╝ ██╔══██╗██║██║╚██╗██║   ██║   ██╔══╝  	"
-	@echo "	██║        ██║███████╗██║     ██║  ██║██║██║ ╚████║   ██║   ██║     	"
+	@echo "\n\033[03mThe library archive of \033[00m\033[0;32m"
+	@echo "	███████╗████████╗     ██████╗ ██████╗ ██╗███╗   ██╗████████╗███████╗"
+	@echo "	██╔════╝╚══██╔══╝     ██╔══██╗██╔══██╗██║████╗  ██║╚══██╔══╝██╔════╝"
+	@echo "	█████╗     ██║        ██████╔╝██████╔╝██║██╔██╗ ██║   ██║   █████╗ "
+	@echo "	██╔══╝     ██║        ██╔═══╝ ██╔══██╗██║██║╚██╗██║   ██║   ██╔══╝ "
+	@echo "	██║        ██║███████╗██║     ██║  ██║██║██║ ╚████║   ██║   ██║ "
 	@echo "	╚═╝        ╚═╝╚══════╝╚═╝     ╚═╝  ╚═╝╚═╝╚═╝  ╚═══╝   ╚═╝   ╚═╝ \033[00m"
-	@echo "							       \033[01mHas been created!\n\033[00m"
+	@echo "							       \033[03mHas been created!\n\033[00m"
 
 all: $(NAME)
 
@@ -44,7 +46,7 @@ fclean: clean
 re: fclean all
 
 $(BUILD):
-	@echo "\033[1;32mCreation of .build\033[0m \n"
+	@echo "\033[1;32m\nCreation of .build\033[0m \n"
 	@mkdir $@ $(DIRS)
 
 $(OBJ_DIR)/%.o: src/%.c | $(BUILD)

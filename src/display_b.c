@@ -1,26 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   treatement.c                                       :+:      :+:    :+:   */
+/*   display_b.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sgah <sgah@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/01 18:05:38 by sgah              #+#    #+#             */
-/*   Updated: 2019/10/27 16:30:27 by sgah             ###   ########.fr       */
+/*   Created: 2019/10/27 21:34:03 by sgah              #+#    #+#             */
+/*   Updated: 2019/10/28 01:18:35 by sgah             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
 #include "ft_printf.h"
 
-int		treatement(t_tab *tab)
+void    display_b(t_tab *tab)
 {
-	tab->i++;
-	parse_convert(tab);
-	parse_field_width(tab);
-	parse_precision(tab);
-	parse_arguments(tab);
-	parse_specifier(tab);
-	switch_display(tab);
-	return (tab->len);
+    intmax_t b;
+    intmax_t c;
+    int i;
+
+    b = (intmax_t)(va_arg(tab->args, intmax_t));
+    c = b;
+    i = 1;
+    while (c /= 2)
+        i++;
+    while (i-- && (tab->len += 1))
+        ((b >> i) & 1) ? write(1, "1", 1) : write(1, "0", 1);
 }

@@ -6,7 +6,7 @@
 /*   By: sgah <sgah@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/01 18:21:07 by sgah              #+#    #+#             */
-/*   Updated: 2019/10/27 01:32:03 by sgah             ###   ########.fr       */
+/*   Updated: 2019/10/27 14:30:11 by sgah             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,16 +79,16 @@ static t_tab	*do_d(t_tab *tab, intmax_t num, int num_width, int align_left)
 		not_blank++;
 	tab->len += (not_blank <= tab->field_width) ? tab->field_width : not_blank;
 	if (!align_left)
-		display_gap(tab, ' ', tab->field_width - not_blank, 0);
+		display_sep(tab, ' ', tab->field_width - not_blank, 0);
 	if (negatvity_placeholder)
 		write(1, &negatvity_placeholder, 1);
-	display_gap(tab, '0', tab->precision - num_width, 0);
+	display_sep(tab, '0', tab->precision - num_width, 0);
 	if (num != (-9223372036854775807 - 1))
 		ft_putnbrmax_fd(num, 1);
 	else if ((tab->len += 18) > 0)
 		write(1, "9223372036854775808", 19);
 	if (align_left)
-		display_gap(tab, ' ', tab->field_width - not_blank, 0);
+		display_sep(tab, ' ', tab->field_width - not_blank, 0);
 	return (tab);
 }
 
@@ -105,7 +105,7 @@ t_tab			*display_d(t_tab *tab)
 			display_wchar('+', tab);
 		if (tab->convert[2] == ' ')
 			display_wchar(' ', tab);
-		display_gap(tab, ' ', tab->field_width, 1);
+		display_sep(tab, ' ', tab->field_width, 1);
 		return (tab);
 	}
 	num_width = get_tens(num);

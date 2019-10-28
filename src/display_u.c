@@ -6,7 +6,7 @@
 /*   By: sgah <sgah@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/01 18:26:21 by sgah              #+#    #+#             */
-/*   Updated: 2019/10/27 01:32:03 by sgah             ###   ########.fr       */
+/*   Updated: 2019/10/27 14:30:11 by sgah             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,11 @@ static t_tab		*do_u(t_tab *tab, uintmax_t num, int num_width, int left)
 		not_blank = tab->precision;
 	tab->len += (not_blank <= tab->field_width) ? tab->field_width : not_blank;
 	if (!left)
-		display_gap(tab, ' ', tab->field_width - not_blank, 0);
-	display_gap(tab, '0', tab->precision - num_width, 0);
+		display_sep(tab, ' ', tab->field_width - not_blank, 0);
+	display_sep(tab, '0', tab->precision - num_width, 0);
 	ft_putnbrumax_fd(num, 1);
 	if (left)
-		display_gap(tab, ' ', tab->field_width - not_blank, 0);
+		display_sep(tab, ' ', tab->field_width - not_blank, 0);
 	return (tab);
 }
 
@@ -74,7 +74,7 @@ t_tab				*display_u(t_tab *tab)
 	num = get_num(tab);
 	if (num == 0 && tab->precision == 0)
 	{
-		display_gap(tab, ' ', tab->field_width, 1);
+		display_sep(tab, ' ', tab->field_width, 1);
 		return (tab);
 	}
 	num_width = get_tens(num);

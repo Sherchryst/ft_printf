@@ -6,12 +6,11 @@
 /*   By: sgah <sgah@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/01 18:28:34 by sgah              #+#    #+#             */
-/*   Updated: 2019/10/01 18:28:36 by sgah             ###   ########.fr       */
+/*   Updated: 2019/10/27 22:01:20 by sgah             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <unistd.h>
 
 static void		oct_4(wint_t c)
 {

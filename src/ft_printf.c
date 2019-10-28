@@ -6,7 +6,7 @@
 /*   By: sgah <sgah@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/01 17:52:57 by sgah              #+#    #+#             */
-/*   Updated: 2019/10/26 00:48:47 by sgah             ###   ########.fr       */
+/*   Updated: 2019/10/27 16:10:22 by sgah             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int			ft_printf(const char *format, ...)
 	{
 		va_start(tab->args, format);
 		tab->len = parser(tab);
+		IF_ERROR(1);
 		va_end(tab->args);
 	}
 	len = tab->len;

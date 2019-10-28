@@ -6,7 +6,7 @@
 /*   By: sgah <sgah@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/01 18:24:43 by sgah              #+#    #+#             */
-/*   Updated: 2019/10/27 01:32:03 by sgah             ###   ########.fr       */
+/*   Updated: 2019/10/27 15:52:12 by sgah             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,12 @@ static t_tab		*print_u(t_tab *tab, char *str, int align_left)
 	not_blank = num_width;
 	tab->len += (not_blank <= tab->field_width) ? tab->field_width : not_blank;
 	if (!align_left)
-		display_gap(tab, ' ', tab->field_width - not_blank, 0);
+		display_sep(tab, ' ', tab->field_width - not_blank, 0);
 	write(1, "0x", 2);
-	display_gap(tab, '0', (tab->precision - num_width) + 2, 1);
+	display_sep(tab, '0', (tab->precision - num_width) + 2, 1);
 	ft_putstr(str);
 	if (align_left)
-		display_gap(tab, ' ', tab->field_width - not_blank, 0);
+		display_sep(tab, ' ', tab->field_width - not_blank, 0);
 	free(str);
 	return (tab);
 }
@@ -50,7 +50,7 @@ t_tab				*display_p(t_tab *tab)
 	align_left = 0;
 	num = get_num(tab);
 	if (!(str = ft_itoa_base(num, 16, 'a')))
-		exit(-1);
+		ERROR(1);
 	if (tab->convert[0] == '-')
 		align_left = 1;
 	if (tab->precision == 0 && num == 0)
