@@ -6,7 +6,7 @@
 /*   By: sgah <sgah@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/01 18:29:40 by sgah              #+#    #+#             */
-/*   Updated: 2019/10/27 17:16:50 by sgah             ###   ########.fr       */
+/*   Updated: 2019/10/28 02:43:51 by sgah             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,8 @@ static t_tab	*do_null(t_tab *tab)
 	int			i;
 
 	i = 0;
-	s = wstrdup(L"(null)", tab);
+	if (!(s = wstrdup(L"(null)", tab)))
+		IF_ERROR(1, NULL);
 	if (tab->precision > -1)
 	{
 		while (s[i] && tab->precision-- > 0)

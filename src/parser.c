@@ -6,7 +6,7 @@
 /*   By: sgah <sgah@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/01 17:55:49 by sgah              #+#    #+#             */
-/*   Updated: 2019/10/27 16:06:32 by sgah             ###   ########.fr       */
+/*   Updated: 2019/10/28 02:46:15 by sgah             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,10 @@ int					parser(t_tab *tab)
 		if (tab->copy[tab->i] == '%')
 		{
 			print_format(tab, count);
-			IF_ERROR(1);
+			IF_ERROR(1, -1);
 			reinit(tab);
 			treatement(tab);
-			IF_ERROR(1);
+			IF_ERROR(1, -1);
 			count = 0;
 		}
 		else
