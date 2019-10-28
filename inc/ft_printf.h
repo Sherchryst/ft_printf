@@ -6,7 +6,7 @@
 /*   By: sgah <sgah@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/01 18:35:18 by sgah              #+#    #+#             */
-/*   Updated: 2019/10/28 02:40:16 by sgah             ###   ########.fr       */
+/*   Updated: 2019/10/28 03:16:46 by sgah             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <string.h>
 # include <stdlib.h>
 # include <unistd.h>
-# define ERROR(n) if((tab->error = n)) return NULL
+# define ERROR(n) if((tab->error = n)) return (NULL)
 # define IF_ERROR(n, ret) if(tab->error == n) return (ret)
 # define ERROR_V(n) if((tab->error = n)) return
 
